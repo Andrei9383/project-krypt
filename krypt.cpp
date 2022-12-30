@@ -16,7 +16,6 @@ char nbr[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 char sym[8] = { '!', '@', '#', '$', '%', '^', '&', '*'};
 
 string krypt(string input, bool show_status){
-    char* chr;
     if(!input.empty() && show_status){
         cout << "encrypting..." << endl << endl;
     }
@@ -25,8 +24,9 @@ string krypt(string input, bool show_status){
         return 0;
     }
     string str_obj(input);
-    chr = &str_obj[0];
-    
+    char* chr = new char[input.length() + 1];
+    strcpy(chr, input.c_str());
+
     int length = input.length();
     
     int delta = 2 * pow(length - 1, 2);
@@ -113,7 +113,7 @@ string krypt(string input, bool show_status){
 
 int main(){
     string input;
-    cin >> input;
+    getline(cin, input);
     krypt(input, true);
     return 0;
 }
